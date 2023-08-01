@@ -1,11 +1,17 @@
-# Use the official MongoDB image from Docker Hub
-FROM mongo
+FROM node:16
 
-# Create a directory to store the MongoDB data
-RUN mkdir -p /data/db
+# Create app directory
+WORKDIR /usr/src/app
 
-# Set the /data/db directory as the working directory
-WORKDIR /data/db
+# Install app dependencies
+COPY package*.json ./
 
-# Expose the default MongoDB port (27017)
-EXPOSE 27017
+RUN npm install
+
+# Copy app source code
+COPY . .
+
+#Expose port and start application
+EXPOSE 5000
+
+CMD [ "npm", "start" ]

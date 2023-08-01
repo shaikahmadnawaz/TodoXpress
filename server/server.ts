@@ -1,20 +1,17 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import mongoose, {
-  Document,
-  Schema,
-  Model,
-  model,
-  ConnectOptions,
-} from "mongoose";
+import mongoose from "mongoose";
 
 const app: Application = express();
 const port = 5000;
 
-const mongoURL = "mongodb://mongodb_container:27017/";
+const mongoURL = "mongodb://mongodb_container:27017/?useNewUrlParser=true";
 
-mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+} as any);
 
 app.use(cors());
 app.use(bodyParser.json());
